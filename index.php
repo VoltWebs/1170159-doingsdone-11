@@ -1,6 +1,28 @@
 <?php
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
+
+$projects = ['Входящие','Учеба','Работа','Домашние дела','Авто'];
+
+$tasks = [
+    ['task_name' => 'Собеседование в IT компании', 'task_date' => '01.12.2019', 'task_cat' => 'Работа', 'task_status' => false],
+    ['task_name' => 'Выполнить тестовое задание', 'task_date' => '25.12.2019', 'task_cat' => 'Работа', 'task_status' => false],
+    ['task_name' => 'Сделать задание первого раздела', 'task_date' => '21.12.2019', 'task_cat' => 'Учеба', 'task_status' => true],
+    ['task_name' => 'Встреча с другом', 'task_date' => '22.12.2019', 'task_cat' => 'Входящие', 'task_status' => false],
+    ['task_name' => 'Купить корм для кота', 'task_date' => null, 'task_cat' => 'Домашние дела', 'task_status' => false],
+    ['task_name' => 'Заказать пиццу', 'task_date' => null, 'task_cat' => 'Домашние дела', 'task_status' => false]
+];
+
+function countTask(array $tasks, $name) {
+    $count = 0;
+    foreach ($tasks as $key => $val) {
+        if($val['task_cat'] === $name) {
+            $count++;
+        }
+    }
+    return $count;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -42,11 +64,10 @@ $show_complete_tasks = rand(0, 1);
 
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
-                        <?php $projects = ['Входящие','Учеба','Работа','Домашние дела','Авто']; ?>
                         <?php foreach ($projects as $val): ?>
                         <li class="main-navigation__list-item">
                             <a class="main-navigation__list-item-link" href="#"><?=$val; ?></a>
-                            <span class="main-navigation__list-item-count">0</span>
+                            <span class="main-navigation__list-item-count"><?=countTask($tasks, $val); ?></span>
                         </li>
                         <?php endforeach; ?>
                     </ul>
@@ -81,15 +102,6 @@ $show_complete_tasks = rand(0, 1);
                 </div>
 
                 <table class="tasks">
-                    <?php $tasks = [
-                      ['task_name' => 'Собеседование в IT компании', 'task_date' => '01.12.2019', 'task_cat' => 'Работа', 'task_status' => false],
-                      ['task_name' => 'Выполнить тестовое задание', 'task_date' => '25.12.2019', 'task_cat' => 'Работа', 'task_status' => false],
-                      ['task_name' => 'Сделать задание первого раздела', 'task_date' => '21.12.2019', 'task_cat' => 'Учеба', 'task_status' => true],
-                      ['task_name' => 'Встреча с другом', 'task_date' => '22.12.2019', 'task_cat' => 'Входящие', 'task_status' => false],
-                      ['task_name' => 'Купить корм для кота', 'task_date' => null, 'task_cat' => 'Домашние дела', 'task_status' => false],
-                      ['task_name' => 'Заказать пиццу', 'task_date' => null, 'task_cat' => 'Домашние дела', 'task_status' => false]
-                    ]
-                    ?>
                     <?php foreach($tasks as $key => $val): ?>
                     <tr class="tasks__item task <?php if($val['task_status'] == true): ?>task--completed <?php endif; ?>">
                         <td class="task__select">
