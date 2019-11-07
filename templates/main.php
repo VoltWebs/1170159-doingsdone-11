@@ -38,7 +38,7 @@
 
     <table class="tasks">
         <?php foreach($tasks as $key => $val): ?>
-            <tr class="tasks__item task <?php if($val['task_status'] == true): ?>task--completed <?php endif; ?>">
+            <tr class="tasks__item task <?php if($val['task_status'] == true): ?>task--completed <?php endif; if(checkImportant($val['task_date'])): ?>task--important<?php endif; ?>">
                 <td class="task__select">
                     <label class="checkbox task__checkbox">
                         <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
