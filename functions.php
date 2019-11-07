@@ -155,10 +155,15 @@ function countTask(array $tasks, $name) {
     return $count;
 }
 
-function timeTask($date) {
-    $endDate = strtotime(strval($date));
-    $curDate = date("d-m-Y");
-    $curTime = strtotime($curDate);
+function checkImportant($date) {
+    if (empty($date)) {
+        return false;
+    }
+    $endDate = strtotime($date);
+    $curTime = time();
     $diffDate = floor(($endDate - $curTime) / 3600);
-    return $diffDate;
+    if($diffDate <= 24) {
+        return true;
+    }
+    return false;
 };
