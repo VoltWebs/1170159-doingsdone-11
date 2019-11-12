@@ -3,23 +3,25 @@ USE doingsdone;
 
 CREATE TABLE projects (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name CHAR(30)
+    id_user INT NOT NULL,
+    name VARCHAR(30)
 );
 
 CREATE TABLE tasks (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name CHAR,
-    file CHAR,
+    id_project INT NOT NULL,
+    name VARCHAR(255),
+    file VARCHAR(255),
     add_time TIMESTAMP,
     end_time TIMESTAMP,
-    status INT(1) DEFAULT 0
+    status INT DEFAULT 0
 );
 
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name CHAR,
+    name VARCHAR(80),
     email VARCHAR(128) UNIQUE,
-    password CHAR(64),
+    password VARCHAR(64),
     data DATETIME
 );
 
